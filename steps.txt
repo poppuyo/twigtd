@@ -1,0 +1,7 @@
+Create a level design
+Get one basic tower working
+Get one basic enemy working
+Get killing / not killing enemies working
+Add more towers
+Add more enemies
+Add a HUD / message system?
