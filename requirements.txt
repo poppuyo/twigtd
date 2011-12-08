@@ -11,11 +11,11 @@ Monsters should be able to walk a path (JM)
 ------
 *******
 Change the speed (JL)
-Add scenery
+Add scenery (JM)
 Polish up leveling (JG)
 Infinite spawn (JL)
 Overarching state machine
 	Allow user to start game with keypress / other action
-Set the default camera position
+Set the default camera position (JM)
 More tutorials?
 Penalty for letting through an enemy
