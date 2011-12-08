@@ -38,7 +38,7 @@
   (let ((p (+ @(-30 0 -10) (MathUtil.NoiseVector 100))))
     (if (< (magnitude p) 400)
 	p
-	(random-point))))
+	(random-point2))))
 
 ;; Put a bunch of trees in random locations.
 (for-each (lambda (ignore)

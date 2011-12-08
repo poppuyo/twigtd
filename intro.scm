@@ -48,7 +48,7 @@
             (messages (TimeoutMessage (this.Say "You'll be able to move your camera with the arrow keys, and zoom in/out with x/z.")
                                       (goto welcome14))))
   (welcome14 (enter (set-timeout 2))
-            (messages (TimeoutMessage (this.Say "A word of warning: towers cann't be sold, so place them wisely!")
+            (messages (TimeoutMessage (this.Say "A word of warning: towers can't be sold, so place them wisely!")
                                       (goto welcome15))))
   (welcome15 (enter (set-timeout 2))
             (messages (TimeoutMessage (this.Say "That's it! Press Space to begin!")
