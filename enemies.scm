@@ -38,69 +38,72 @@
 (for-each (lambda (x) (set! x.Cloaked true) (set! x.color Color.Yellow))
           enemies)
 
+
+
 (within enemies
         (define-state-machine walk-path
           (start-point (enter (set-timeout 0)
-                              (set! this.Velocity @(5 0 0))) ; (* (+ 1 (/ kills 5)) @(5 0 0))))
+                              (set! this.Velocity (vector (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed) 0 0))) 
                        (messages (TimeoutMessage
                                   (cond ((< (distance this.Position @(-40 0 -50)) 1) (goto point2))
                                         ((> (distance this.Position @(-40 0 -50)) 1) (goto start-point))))))
           (point2 (enter (set-timeout 0)
-                         (set! this.Velocity @(0 0 -5)))
+                         (set! this.Velocity (vector 0 0 (* -1 (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed)))))
                   (messages (TimeoutMessage
                              (cond ((< (distance this.Position @(-40 0 -60)) 1) (goto point3))
                                    ((> (distance this.Position @(-40 0 -60)) 1) (goto point2))))))
           (point3 (enter (set-timeout 0)
-                         (set! this.Velocity @(5 0 0)))
+                         (set! this.Velocity (vector (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed) 0 0)))
                   (messages (TimeoutMessage
                              (cond ((< (distance this.Position @(-30 0 -60)) 1) (goto point4))
                                    ((> (distance this.Position @(-30 0 -60)) 1) (goto point3))))))
           (point4 (enter (set-timeout 0)
-                         (set! this.Velocity @(0 0 5)))
+                         (set! this.Velocity (vector 0 0 (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed))))
                   (messages (TimeoutMessage
                              (cond ((< (distance this.Position @(-30 0 -30)) 1) (goto point5))
                                    ((> (distance this.Position @(-30 0 -30)) 1) (goto point4))))))
           (point5 (enter (set-timeout 0)
-                         (set! this.Velocity @(5 0 0)))
+                         (set! this.Velocity (vector (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed) 0 0)))
                   (messages (TimeoutMessage
                              (cond ((< (distance this.Position @(0 0 -30)) 1) (goto point6))
                                    ((> (distance this.Position @(0 0 -30)) 1) (goto point5))))))
           (point6 (enter (set-timeout 0)
-                         (set! this.Velocity @(0 0 5)))
+                         (set! this.Velocity (vector 0 0 (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed))))
                   (messages (TimeoutMessage
                              (cond ((< (distance this.Position @(0 0 0)) 1) (goto point7))
                                    ((> (distance this.Position @(0 0 0)) 1) (goto point6))))))
           (point7 (enter (set-timeout 0)
-                         (set! this.Velocity @(5 0 0)))
+                         (set! this.Velocity (vector (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed) 0 0)))
                   (messages (TimeoutMessage
                              (cond ((< (distance this.Position @(20 0 0)) 1) (goto point8))
                                    ((> (distance this.Position @(20 0 0)) 1) (goto point7))))))
           (point8 (enter (set-timeout 0)
-                         (set! this.Velocity @(0 0 5)))
+                         (set! this.Velocity (vector 0 0 (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed))))
                   (messages (TimeoutMessage
                              (cond ((< (distance this.Position @(20 0 30)) 1) (goto point9))
                                    ((> (distance this.Position @(20 0 30)) 1) (goto point8))))))
           (point9 (enter (set-timeout 0)
-                         (set! this.Velocity @(-5 0 0)))
+                         (set! this.Velocity (vector (* -1 (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed)) 0 0)))
                   (messages (TimeoutMessage
                              (cond ((< (distance this.Position @(10 0 30)) 1) (goto point10))
                                    ((> (distance this.Position @(10 0 30)) 1) (goto point9))))))
           (point10 (enter (set-timeout 0)
-                          (set! this.Velocity @(0 0 5)))
+                          (set! this.Velocity (vector 0 0 (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed))))
                    (messages (TimeoutMessage
                               (cond ((< (distance this.Position @(10 0 40)) 1) (goto point11))
                                     ((> (distance this.Position @(10 0 40)) 1) (goto point10))))))
           (point11 (enter (set-timeout 0)
-                          (set! this.Velocity @(-5 0 0)))
+                          (set! this.Velocity (vector (* -1 (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed)) 0 0)))
                    (messages (TimeoutMessage
                               (cond ((< (distance this.Position @(0 0 40)) 1) (goto point12))
                                     ((> (distance this.Position @(0 0 40)) 1) (goto point11))))))
           (point12 (enter (set-timeout 0)
-                          (set! this.Velocity @(-5 0 0)))
+                          (set! this.Velocity (vector (* -1 (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed)) 0 0)))
                    (messages (TimeoutMessage
                               (goto point12))))
           (default (enter (set! this.Velocity @(0 0 0)) 
                           (set! this.Position @(-50 0 -50))
+                          (set! this.MaximumSpeed real-max-speed) ; reset their max speed
                           (set-timeout 5))
             (messages (TimeoutMessage
                        (cond ((< 0.5 (distance this.Position @(-50 0 -50)))(goto default))

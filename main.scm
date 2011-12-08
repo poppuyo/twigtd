@@ -1,8 +1,10 @@
 (cd-here)
 
 (require 'state-machines)
+(define real-max-speed 20)
 (define gold 150)
 (define kills 0)
+(define difficulty-scale 10)
 (define-twig-object announcer Adult @(0 0 0) @(0 0 1)
   Color: Color.Red)
 (load "HUDs.scm")
