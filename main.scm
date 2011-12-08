@@ -6,12 +6,11 @@
 (define lives 100)
 (define kills 0)
 (define difficulty-scale 10)
-(define-twig-object announcer Adult @(0 0 0) @(0 0 1)
+(define-twig-object announcer Adult @(-35 0 -40) @(0 0 1)
   Color: Color.Red)
 (load "HUDs.scm")
 
 (titles.Say (String.Format "Gold: {0}  Lives: {1}" gold lives) 0.0 0.0)
-(define all-characters (list announcer))
 
 (define (random-point)
   (let ((p (MathUtil.NoiseVector 15)))
@@ -35,15 +34,3 @@
                           (load "towermanager.scm"))
                   (load "enemies.scm")
                   ))))
-
-
-
-
-
-
-
-
-
-
-
-

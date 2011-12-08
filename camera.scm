@@ -24,6 +24,7 @@
 	   (set! game.CameraTargetLocation (+ game.CameraTargetLocation (vector 0 -1 0))))
 	 (when (key-down? Keys.R)
 	   (set! game.DebugObject null)
+	   (set! gameCamera.Subject null)
 	   (set! gameCamera.SubjectDistance 10)
 	   (set! game.CameraUp @(0 0 -1))
 	   (set! game.CameraPosition @(-40 30 -50))
