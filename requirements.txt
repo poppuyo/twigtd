@@ -2,18 +2,18 @@ I want to be able to place towers. (JG)
 	e.g. Paths can cross
 I want to be able to palce multiple types of towers
 	e.g. AOE, slow, fast attack, high damage, etc
-I want to see increasing difficulty.
-I want to see multiple waves.
+I want to see increasing difficulty. (JL)
+I want to see multiple waves. REPLACED BY INFINITE SPAWN
 I want to have an upgrade system. (JG)
 ------
 Towers should be able to attack (JL)
 Monsters should be able to walk a path (JM)
 ------
 *******
-Change the speed
+Change the speed (JL)
 Add scenery
-Polish up leveling
-Infinite spawn
+Polish up leveling (JG)
+Infinite spawn (JL)
 Overarching state machine
 	Allow user to start game with keypress / other action
 Set the default camera position
