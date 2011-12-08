@@ -1,6 +1,4 @@
 ;; path (start/end spawns)
-;; "scenery"
-;; 
 
 (new-component Wall @(-100 0 -51) @(-42 0 -51) 1.0 0.2)
 (new-component Wall @(-100 0 -49) @(-40 0 -49)  1.0 0.2)

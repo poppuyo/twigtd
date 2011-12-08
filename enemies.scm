@@ -98,10 +98,19 @@
           (point12 (enter (set-timeout 0)
                           (set! this.Velocity @(-5 0 0)))
                    (messages (TimeoutMessage
-                              (goto point12))))
+				(cond ((< (distance this.Position @(-50 0 40)) 1) (goto default2))
+				      ((> (distance this.Position @(-50 0 40)) 1) (goto point12))))))
           (default (enter (set! this.Velocity @(0 0 0)) 
                           (set! this.Position @(-50 0 -50))
                           (set-timeout 5))
             (messages (TimeoutMessage
                        (cond ((< 0.5 (distance this.Position @(-50 0 -50)))(goto default))
-                             (else (goto start-point))))))))
+                             (else (goto start-point))))))
+	  (default2 (enter (set! this.Velocity @(0 0 0))
+			   (set! this.Position @(-50 0 -50))
+			   (set! lives (- lives 1))
+			   (titles.say (String.Format "Gold: {0}  Lives: {1}" gold lives))
+			   (set-timeout 5))
+	    (messages (TimeoutMessage
+		       (cond ((< 0.5 (distance this.Position @(-50 0 -50))) (goto default2))
+			     (else (goto start-point))))))))
