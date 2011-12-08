@@ -32,6 +32,7 @@
                                           (within (new-twig-object Child (make-name) 1 ground-plane.MouseProjection @(0 0 1))
                                                   (set! gold (- gold 25))
                                                   (titles.say (String.Format "Gold: {0}" gold))
+                                                  (define gain 8)
                                                   (define-state-machine click-annoyance
                                                     (start (messages ((click-left-on? this)
                                                                       (this.Say "Right click to upgrade or left click to view stats")
@@ -45,6 +46,7 @@
                                                                               (set! gold (- gold 50))
                                                                               (titles.say (String.Format "Gold: {0}" gold))
                                                                               (set! this.Color Color.Purple)
+                                                                              (set! gain (* gain 2))
                                                                               (goto stage2))
                                                                              (else (this.Say "not enough gold")
                                                                                    (goto start))))))
@@ -60,6 +62,7 @@
                                                                               (set! gold (- gold 100))
                                                                               (titles.say (String.Format "Gold: {0}" gold))
                                                                               (set! this.Color Color.Blue)
+                                                                              (set! gain (* gain 2))
                                                                               (goto stage4))
                                                                              (else (this.Say "not enough gold")
                                                                                    (goto stage2))))))
@@ -93,15 +96,19 @@
                                                     (aim (enter (set-timeout 0))
                                                          (messages (TimeoutMessage (goto fire))))
                                                     (fire (enter (set-timeout 0) (set! aPen.Velocity 
-                                                                                       (* 5 (unit (- aStump.Position aPen.Position)))))
+                                                                                       (* gain (unit (- aStump.Position aPen.Position)))))
                                                           (messages 
                                                            (TimeoutMessage 
-                                                            (cond ((< aPen.Position.Y 0.1) (goto acquire-target))
+                                                            (cond ((> (distance aPen.Position this.Position) range) (goto acquire-target))
+                                                                  ((< aPen.Position.Y 0.1) (goto acquire-target))
                                                                   ((> (distance aPen.Position aStump.Position) 1) (goto fire))
                                                                   ((< (distance aPen.Position aStump.Position) 1) (goto hit)))))) 
-                                                    (hit (enter 
+                                                    (hit (enter
+                                                          (this.Say "hit!")
+                                                          (titles.say (String.Format "Gold: {0} / Kills: {1}" gold kills))
                                                           (aStump.walk-path.SetState "default")
                                                           (set! gold (+ 1 gold))
+                                                          (set! kills (+ 1 kills))
                                                           (set-timeout 0))
                                                          (messages (TimeoutMessage (goto acquire-target))))
                                                     (end (enter (this.Say "DONE WITH THIS SHIT") (set-timeout 0))

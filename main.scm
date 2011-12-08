@@ -2,6 +2,7 @@
 
 (require 'state-machines)
 (define gold 150)
+(define kills 0)
 (define-twig-object announcer Adult @(0 0 0) @(0 0 1)
   Color: Color.Red)
 (load "HUDs.scm")
@@ -31,7 +32,7 @@
 
 (load "towermanager.scm"))
 
-(load "enemies2.scm")
+(load "enemies.scm")
 
 
 ;(define-twig-object fred Adult (ground-plane-mouse-location) @(0 0 1)

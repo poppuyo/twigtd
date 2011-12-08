@@ -1,11 +1,14 @@
-I want to be able to place towers.
+I want to be able to place towers. (JG)
 	e.g. Paths can cross
 I want to be able to palce multiple types of towers
 	e.g. AOE, slow, fast attack, high damage, etc
 I want to see increasing difficulty.
 I want to see multiple waves.
-I want to have an upgrade system.
-
+I want to have an upgrade system. (JG)
+------
+Towers should be able to attack (JL)
+Monsters should be able to walk a path (JM)
+------
 *******
 Change the speed
 Add scenery
