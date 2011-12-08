@@ -1,5 +1,5 @@
 (set! game.CameraTargetLocation announcer.Position)
-(set! game.CameraPosition @(0 1 10))
+(set! game.CameraPosition @(-35 5 -25))
 
 (define-state-machine dialog
   (welcome1 (enter (this.Say "Welcome to twigtd!") 
