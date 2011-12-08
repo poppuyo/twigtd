@@ -2,8 +2,8 @@
 ;; "scenery"
 ;; 
 
-(new-component Wall @(-45 0 -49) 10.0 1.0 0.2)
-(new-component Wall @(-46 0 -51) 8.0 1.0 0.2)
+(new-component Wall @(-100 0 -51) @(-42 0 -51) 1.0 0.2)
+(new-component Wall @(-100 0 -49) @(-40 0 -49)  1.0 0.2)
 
 (new-component Wall @(-42 0 -51) @(-42 0 -61) 1.0 0.2)
 (new-component Wall @(-40 0 -49) @(-40 0 -59) 1.0 0.2)
@@ -29,8 +29,8 @@
 (new-component Wall @(20 0 31) @(12 0 31) 1.0 0.2)
 (new-component Wall @(18 0 29) @(10 0 29) 1.0 0.2)
 
-(new-component Wall @(12 0 31) @(12 0 41) 1.0 0.2)
-(new-component Wall @(10 0 29) @(10 0 39) 1.0 0.2)
+(new-component Wall @(12 0 31) @(12 0 40.5) 1.0 0.2)
+(new-component Wall @(10 0 29) @(10 0 38.5) 1.0 0.2)
 
-(new-component Wall @(12 0 41) @(-51 0 41) 1.0 0.2)
-(new-component Wall @(10 0 39) @(-51 0 39) 1.0 0.2)
+(new-component Wall @(12 0 40.5) @(-100 0 40.5) 1.0 0.2)
+(new-component Wall @(10 0 38.5) @(-100 0 38.5) 1.0 0.2)
