@@ -35,7 +35,7 @@
                       fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone
                       twentytwo twentythree twentyfour twentyfive twentysix twentyseven
                       twentyeight twentynine thirty))
-(for-each (lambda (x) (set! x.Cloaked true) (set! x.color Color.Yellow))
+(for-each (lambda (x) (set! x.Cloaked true) (set! x.color Color.Chartreuse))
           enemies)
 
 
