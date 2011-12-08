@@ -1,7 +1,7 @@
 (set! gameCamera.SubjectDistance 10)
 (set! game.CameraUp @(0 0 -1))
-(set! game.CameraPosition (vector -40 30 -50))
-(set! game.CameraTargetLocation (vector -40 0 -50))
+(set! game.CameraPosition @(-40 30 -50))
+(set! game.CameraTargetLocation @(-40 0 -50))
 
 (define-state-machine moveCamera
   (start (when (key-down? Keys.Up)
@@ -21,4 +21,10 @@
 	   (set! game.CameraTargetLocation (+ game.CameraTargetLocation (vector 0 1 0))))
 	 (when (key-down? Keys.X)
 	   (set! game.CameraPosition (+ game.CameraPosition (vector 0 -1 0)))
-	   (set! game.CameraTargetLocation (+ game.CameraTargetLocation (vector 0 -1 0))))))
+	   (set! game.CameraTargetLocation (+ game.CameraTargetLocation (vector 0 -1 0))))
+	 (when (key-down? Keys.R)
+	   (set! game.DebugObject null)
+	   (set! gameCamera.SubjectDistance 10)
+	   (set! game.CameraUp @(0 0 -1))
+	   (set! game.CameraPosition @(-40 30 -50))
+	   (set! game.CameraTargetLocation @(-40 0 -50)))))

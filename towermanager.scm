@@ -1,12 +1,5 @@
 ;;tower manager
 
-
-
-;(define (random-point)
-;  (let ((p (MathUtil.NoiseVector 15)))
-;    (if (< (magnitude p) 8)
-;	p
-;	(random-point))))
 (define count 0)
 
 (define ground-plane (first (filter (lambda (x) (is? x GroundPlane)) game.Components)))
@@ -31,7 +24,7 @@
                                    (cond ((>= gold 25)
                                           (within (new-twig-object Child (make-name) 1 ground-plane.MouseProjection @(0 0 1))
                                                   (set! gold (- gold 25))
-                                                  (titles.say (String.Format "Gold: {0}" gold))
+                                                  (titles.say (String.Format "Gold: {0}  Lives: {1}" gold lives))
                                                   (define gain 8)
                                                   (define-state-machine click-annoyance
                                                     (start (messages ((click-left-on? this)
@@ -44,7 +37,7 @@
                                                                        (cond ((>= gold 50)
                                                                               (this.Say "attack speed = 2")
                                                                               (set! gold (- gold 50))
-                                                                              (titles.say (String.Format "Gold: {0}" gold))
+                                                                              (titles.say (String.Format "Gold: {0}  Lives: {1}" gold lives))
                                                                               (set! this.Color Color.Purple)
                                                                               (set! gain (* gain 2))
                                                                               (goto stage2))
@@ -60,7 +53,7 @@
                                                                        (cond ((>= gold 100)
                                                                               (this.Say "attack speed = 3")
                                                                               (set! gold (- gold 100))
-                                                                              (titles.say (String.Format "Gold: {0}" gold))
+                                                                              (titles.say (String.Format "Gold: {0}  Lives: {1}" gold lives))
                                                                               (set! this.Color Color.Blue)
                                                                               (set! gain (* gain 2))
                                                                               (goto stage4))
@@ -105,7 +98,7 @@
                                                                   ((< (distance aPen.Position aStump.Position) 1) (goto hit)))))) 
                                                     (hit (enter
                                                           (this.Say "hit!")
-                                                          (titles.say (String.Format "Gold: {0} / Kills: {1}" gold kills))
+                                                          (titles.say (String.Format "Gold: {0} / Kills: {1}  Lives: {2}" gold kills lives))
                                                           (aStump.walk-path.SetState "default")
                                                           (set! gold (+ 1 gold))
                                                           (set! kills (+ 1 kills))
@@ -115,36 +108,5 @@
                                                          (messages (TimeoutMessage (goto end)))))
                                                   )
                                           (set! towerlist (cons ground-plane.MouseProjection towerlist)))
-                                         (else (announcer.say "not enough gold")
+                                         (else (announcer.say "not enough x")
                                                ))))))
-
-
-
-;(for-each (lambda (x) (within x ((define-state-machine click-annoyance
-;  (start (messages ((click-left-on? this)
-;                    (this.Say "Please interact with me via the prompt.")
-;                    (goto stage1))))
-;  (stage1 (messages ((click-left-on? this)
-;                     (this.Say "I am not able to process pointer-based input.")
-;                     (goto stage2))))
-;  (stage2 (messages ((click-left-on? this)
-;                     (this.Say "Seriously, stop clicking on me. It won't get anything done.")
-;                     (goto stage3))))
-;  (stage3 (messages ((click-left-on? this)
-;                     (this.Say "For the LAST time, STOP clicking on me!")
-;                     (goto stage4))))
-;  (stage4 (messages ((click-left-on? this)
-;                     (this.Say "I can't deal with this.")
-;                     (goto done)
-;                     (dialog.SetState "done"))))
-;  (done (messages ((click-left-on? this)
-;                   (this.Say "I can't deal with this."))))))'(count))
-;
-;  (moveCameraUp (enter (set-timeout 0))
-;                (messages (TimeoutMessage (set! gameCamera.Position.Z (+ gameCamera.Position.Z ;1)) (announcer.Say "hi!") (goto idle))))
-;  (moveCameraDown (enter (set-timeout 0))
-;                  (messages (TimeoutMessage (set! gameCamera.Position.Z (- ;gameCamera.Position.Z 1)) (goto idle))))
-;  (moveCameraLeft (enter (set-timeout 0))
-;                  (messages (TimeoutMessage (set! gameCamera.Position.X (+ ;gameCamera.Position.X 1)) (goto idle))))
-;  (moveCameraRight (enter (set-timeout 0))
-;                   (messages (TimeoutMessage (set! gameCamera.Position.X (- ;gameCamera.Position.X 1)) (goto idle)))))

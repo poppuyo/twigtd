@@ -3,19 +3,15 @@
 (require 'state-machines)
 (define real-max-speed 20)
 (define gold 150)
+(define lives 100)
 (define kills 0)
 (define difficulty-scale 10)
 (define-twig-object announcer Adult @(0 0 0) @(0 0 1)
   Color: Color.Red)
 (load "HUDs.scm")
 (load "level.scm")
-(titles.say (String.Format "Gold: {0}" gold))
+(titles.Say (String.Format "Gold: {0}  Lives: {1}" gold lives) 0.0 0.0)
 (define all-characters (list announcer))
-;;(within announcer
-;;  (load "announcer.scm"))
-
-
-;(set! Physics.gVector @(0 0 0))
 
 (define (random-point)
   (let ((p (MathUtil.NoiseVector 15)))
@@ -23,9 +19,6 @@
 	p
 
 	(random-point))))
-;(for-each (lambda (ignore)
-;            (new-component Stump (random-point)))
-;          '(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15))
 
 (define-twig-object gameCamera Camera)
 
@@ -36,10 +29,6 @@
 (load "towermanager.scm"))
 
 (load "enemies.scm")
-
-
-;(define-twig-object fred Adult (ground-plane-mouse-location) @(0 0 1)
-;  Color: Color.Red)
 
 
 

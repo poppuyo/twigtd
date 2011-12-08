@@ -1,6 +1,4 @@
-;;;
 ;;; Heads-up displays used in the game
-;;;
 
 ;;; Specialized message log that ignores collision messages
 ;;; (because there are a lot of them)
