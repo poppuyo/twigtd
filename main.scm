@@ -34,8 +34,3 @@
                           (load "towermanager.scm"))
                   (load "enemies.scm")
                   ))))
-
-(within gameCamera
-        (load "camera.scm")
-(load "towermanager.scm"))
-(load "enemies.scm")
