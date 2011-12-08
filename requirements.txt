@@ -18,4 +18,4 @@ Overarching state machine
 	Allow user to start game with keypress / other action
 Set the default camera position (JM)
 More tutorials?
-Penalty for letting through an enemy
+Penalty for letting through an enemy (JM)

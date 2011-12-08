@@ -32,3 +32,19 @@
 
 (new-component Wall @(12 0 40.5) @(-100 0 40.5) 1.0 0.2)
 (new-component Wall @(10 0 38.5) @(-100 0 38.5) 1.0 0.2)
+
+;; Picks a point at random
+(define (random-point)
+  (let ((p (+ @(-30 0 -10) (MathUtil.NoiseVector 100))))
+    (if (< (magnitude p) 400)
+	p
+	(random-point))))
+
+;; Put a bunch of trees in random locations.
+(for-each (lambda (ignore)
+	    (new-component Tree (random-point)))
+	  '(10 20 30 40 50 60 70 80 90 100 110 120 130 140 150 160 170 180 190 200 210 220 230 240 250 260 270 280 290 300 310 320 330 340 350 360 370 380 390 400 410 420 430 440 450 460 470 480 490 500))
+
+(for-each (lambda (ignore)
+	    (new-component Stump (random-point)))
+	  '(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15))
