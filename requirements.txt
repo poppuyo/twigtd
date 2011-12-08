@@ -5,3 +5,14 @@ I want to be able to palce multiple types of towers
 I want to see increasing difficulty.
 I want to see multiple waves.
 I want to have an upgrade system.
+
+*******
+Change the speed
+Add scenery
+Polish up leveling
+Infinite spawn
+Overarching state machine
+	Allow user to start game with keypress / other action
+Set the default camera position
+More tutorials?
+Penalty for letting through an enemy
