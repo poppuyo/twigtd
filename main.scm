@@ -6,6 +6,7 @@
 (define-twig-object announcer Adult @(0 0 0) @(0 0 1)
   Color: Color.Red)
 (load "HUDs.scm")
+(load "level.scm")
 (titles.say (String.Format "Gold: {0}" gold))
 (define all-characters (list announcer))
 ;;(within announcer
