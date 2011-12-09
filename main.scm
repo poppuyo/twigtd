@@ -53,4 +53,30 @@
                           (load "camera.scm")
                           (load "towermanager.scm"))
                   (load "enemies.scm")
-                  ))))
+                  (set-timeout 1))
+                 (messages (TimeoutMessage (goto await-defeat))))
+          ; wait to lose
+          (await-defeat
+           (enter (set-timeout 0))
+           (messages (TimeoutMessage 
+                      (cond ((= lives 0) (goto defeat))
+                            ((< lives 0) (goto defeat))
+                            (else (goto await-defeat))))))
+          ; do "losing" animations
+          (defeat (enter
+                   (this.Say "The forces of good have been beaten!")
+                   (set! game.CameraTargetLocation this.Position)
+                   (set! game.CameraPosition @(-35 5 -35))
+                   (set! this.SitUp false)
+                   (set! this.StandUp false)
+                   ; have him fall forward
+                   (set! this.HeadTop.Velocity @(0 0 50))
+                   (set-timeout 3))
+            (messages (TimeoutMessage (goto do-nothing))))
+          ; announcer's dead, have your score
+          (do-nothing
+           (enter (set-timeout 0))
+           (messages (TimeoutMessage (this.Say "...") 
+                                     (set! lives 0)
+                                     (titles.Say (String.Format "Gold: {0} Kills: {1} Lives: {2}" gold kills lives) 0.0 0.0)
+                                     (goto do-nothing))))))
