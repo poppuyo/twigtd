@@ -1,5 +1,7 @@
 (require 'state-machines)
 
+;; Define 30 different enemies, each linearly behind the next, to come into the level
+;; and try to defeat the player
 (define-twig-object one Ball @(-50 0 -50) Color.Yellow)
 (define-twig-object two Ball @(-60 0 -50) Color.Yellow)
 (define-twig-object three Ball @(-70 0 -50) Color.Yellow)
@@ -31,6 +33,8 @@
 (define-twig-object twentynine Ball @(-330 0 -50) Color.Yellow)
 (define-twig-object thirty Ball @(-340 0 -50) Color.Yellow)
 
+;; For every enemy in the game, add the enemy to a list, and then set each enemy to be cloaked,
+;; and chartreuse in color
 (define enemies (list one two three four five six seven eight nine ten eleven twelve thirteen
                       fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone
                       twentytwo twentythree twentyfour twentyfive twentysix twentyseven
@@ -39,11 +43,14 @@
           enemies)
 
 
-
+;; A global state machine for the enemies in the enemy list
 (within enemies
         (define-state-machine walk-path
+	  ;; The first point is (-50, 0, -50), set the initial velocity of the ball, which depends on how many enemies have been
+	  ;; killed, and the difficulty level
           (start-point (enter (set-timeout 0)
-                              (set! this.Velocity (vector (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed) 0 0))) 
+                              (set! this.Velocity (vector (min (* (+ 1 (/ kills difficulty-scale)) 5) this.MaximumSpeed) 0 0)))
+			;; Once the next coordinate is reached at (-40, 0, -50), change the direction, and go to the next state
                        (messages (TimeoutMessage
                                   (cond ((< (distance this.Position @(-40 0 -50)) 1) (goto point2))
                                         ((> (distance this.Position @(-40 0 -50)) 1) (goto start-point))))))
@@ -102,6 +109,9 @@
                    (messages (TimeoutMessage
 				(cond ((< (distance this.Position @(-50 0 40)) 1) (goto default2))
 				      ((> (distance this.Position @(-50 0 40)) 1) (goto point12))))))
+	  ;; This trend continues in reassigning coordinates, until the last coordinate is reached at (-50, 0, -50)
+	  ;; The default state is reached when an enemy is killed. The enemy is replaced at the spawn location, and times out for
+	  ;; 5 seconds, then starts along the path again. This creates an infinite spawn
           (default (enter (set! this.Velocity @(0 0 0)) 
                           (set! this.Position @(-50 0 -50))
                           (set! this.MaximumSpeed real-max-speed) ; reset their max speed
@@ -109,6 +119,8 @@
             (messages (TimeoutMessage
                        (cond ((< 0.5 (distance this.Position @(-50 0 -50)))(goto default))
                              (else (goto start-point))))))
+	  ;; The second default state is reached if the player fails to kill an enemy. In this scenario, lives are lost, and the
+	  ;; enemy is reset to the spawn location
 	  (default2 (enter (set! this.Velocity @(0 0 0))
 			   (set! this.Position @(-50 0 -50))
 			   (set! lives (- lives 1))

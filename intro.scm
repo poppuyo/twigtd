@@ -1,6 +1,8 @@
+; look at our announcer
 (set! game.CameraTargetLocation announcer.Position)
 (set! game.CameraPosition @(-35 5 -25))
 
+; tutorial state-machine
 (define-state-machine dialog
   (welcome1 (enter (this.Say "Welcome to twigtd!") 
                    (set-timeout 2))
@@ -8,9 +10,11 @@
   (welcome2 (enter (this.Say "twigtd is a tower defense game implemented in twig by...") (set-timeout 3))
             (messages (TimeoutMessage 
                        (goto names))))
+  ; mild humor
   (names (enter (this.Say "uhm... what were their names again?") (set! this.FacingDirection @(-100 0 0))
                 (set-timeout 2))
          (messages (TimeoutMessage (goto names2))))
+  ; more credits
   (names2 (enter (this.Say "ah yes...") (set! this.FacingDirection @(0 0 10)) (set-timeout 2))
           (messages (TimeoutMessage (this.Say "by jason, john, and josiah!") 
                                     (goto welcome3))))
@@ -53,7 +57,8 @@
   (welcome15 (enter (set-timeout 2))
             (messages (TimeoutMessage (this.Say "That's it! Press Space to begin!")
                                       (goto welcome15))))
-
+  ; "done" state, activated from the main game-state-machine, by the space bar
+  ; resets the announcer (in case he's looking off to the side)
   (done (enter (set! this.FacingDirection @(0 0 10)) 
                (set-timeout 1))
         (messages (TimeoutMessage (goto done))))
